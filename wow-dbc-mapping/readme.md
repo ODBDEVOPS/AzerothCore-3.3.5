@@ -23,3 +23,12 @@ Analyse exhaustive des liaisons, dépendances et hiérarchies entre les fichiers
 # Avec Mermaid CLI
 npm install -g @mermaid-js/mermaid-cli
 mmdc -i diagrams/dbc-dependencies.mmd -o images/schema.png
+```
+### Importer les Données CSV
+```python
+import pandas as pd
+
+# Charger les liaisons
+df = pd.read_csv('data/dbc-links.csv')
+print(df.head())
+```
