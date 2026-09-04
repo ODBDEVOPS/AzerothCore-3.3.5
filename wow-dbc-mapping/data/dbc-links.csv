@@ -1,0 +1,201 @@
+source_dbc,source_field,target_dbc,target_field,cardinality,domain,description,example,notes
+Spell.dbc,SpellVisualID,SpellVisual.dbc,ID,N-1,Sorts,Association visuelle du sort (impact + aura),Pyroblast (ID 11366) → Visual 1234,Champ double dans les versions modernes
+Spell.dbc,SpellIconID,SpellIcon.dbc,ID,N-1,Sorts,Icône affichée dans le grimoire,Éclair (ID 403) → Icon 188,Icônes partagées entre sorts
+Spell.dbc,SpellCastTimeID,SpellCastTimes.dbc,ID,N-1,Sorts,Temps d'incantation du sort,Boule de feu (ID 133) → 3.5 secondes,0 = instantané
+Spell.dbc,SpellDurationID,SpellDuration.dbc,ID,N-1,Sorts,Durée des effets appliqués,Mot de pouvoir : Bouclier (ID 17) → 30 secondes,0 = permanent
+Spell.dbc,SpellRangeID,SpellRange.dbc,ID,N-1,Sorts,Portée du sort,Tir des arcanes (ID 5143) → 40 mètres,1 = portée standard
+Spell.dbc,SpellCooldownsID,SpellCooldowns.dbc,ID,N-1,Sorts,Temps de recharge du sort,Blizzard (ID 10) → 8 secondes,0 = pas de cooldown
+Spell.dbc,SpellCategoryID,SpellCategory.dbc,ID,N-1,Sorts,Catégorie de cooldown partagé,Tous les sorts de givre → Catégorie 133,Partage le cooldown
+Spell.dbc,SpellDescriptionVariablesID,SpellDescriptionVariables.dbc,ID,1-1,Sorts,Variables pour la description du sort,"""Inflige $s1 points de dégâts""",$s1 $s2 $s3 = variables
+Spell.dbc,SpellEquippedItemsID,SpellEquippedItems.dbc,ID,N-1,Sorts,Item requis équipé pour lancer le sort,Tir mortel (ID 53351) → Arme à distance,Nécessite un type d'arme
+Spell.dbc,SpellInterruptsID,SpellInterrupts.dbc,ID,N-1,Sorts,Comportement d'interruption du sort,Contre-sort (ID 2139) → Interrompt les sorts,Définit si interruptible
+Spell.dbc,SpellLevelsID,SpellLevels.dbc,ID,N-1,Sorts,Niveau requis pour apprendre le sort,Boule de feu → Niveaux 1 14 22,Définit la progression
+Spell.dbc,SpellMissileID,SpellMissile.dbc,ID,N-1,Sorts,Projectile visuel du sort,Flèche de givre (ID 116) → Missile 342,0 = pas de projectile
+Spell.dbc,SpellRadiusID,SpellRadius.dbc,ID,N-1,Sorts,Rayon d'effet de zone du sort,Nova de givre (ID 122) → 10 mètres,Pour les sorts de zone
+Spell.dbc,SpellScalingID,SpellScaling.dbc,ID,N-1,Sorts,Échelle de dégâts selon le niveau,Frappe du héros (ID 78) → Scaling 145,Détermine la progression
+Spell.dbc,SpellShapeshiftID,SpellShapeshift.dbc,ID,N-1,Sorts,Forme animale requise pour le sort,Morsure féroce (ID 22568) → Forme de félin,0 = toutes formes
+Spell.dbc,SpellVisualKitID,SpellVisualKit.dbc,ID,N-1,Sorts,Kit visuel détaillé du sort,Nova de givre → Kit avec particules,Liaison directe moderne
+Spell.dbc,SpellAuraOptionsID,SpellAuraOptions.dbc,ID,N-1,Sorts,Options d'aura du sort,Aura de vindicte → Options spécifiques,Configure les auras
+Spell.dbc,SpellAuraRestrictionsID,SpellAuraRestrictions.dbc,ID,N-1,Sorts,Restrictions d'aura du sort,Anathème → Restrictions de cumul,Limite les cumuls
+Spell.dbc,SpellCastingRequirementsID,SpellCastingRequirements.dbc,ID,N-1,Sorts,Conditions d'incantation du sort,Sorts de pêche → Besoin d'une canne,Vérifie l'équipement
+Spell.dbc,SpellPowerID,SpellPower.dbc,ID,N-1,Sorts,Puissance des effets du sort,Éclair de givre (ID 116) → Puissance 214,Détermine les dégâts
+Spell.dbc,SpellRuneCostID,SpellRuneCost.dbc,ID,N-1,Sorts,Coût en runes pour Chevalier de la mort,Frappe de givre → 1 rune de givre,Spécifique DK
+Spell.dbc,ReagentID_1,Item.dbc,ID,N-N,Sorts,Composant consommé n°1,Portail : Hurlevent → Pierre de portail,Maximum 8 composants
+Spell.dbc,ReagentID_2,Item.dbc,ID,N-N,Sorts,Composant consommé n°2,Invocation : Monture → Composant secondaire,Champ optionnel
+Spell.dbc,ReagentID_3,Item.dbc,ID,N-N,Sorts,Composant consommé n°3,Rituel d'invocation → Troisième composant,Champ optionnel
+Spell.dbc,ReagentID_4,Item.dbc,ID,N-N,Sorts,Composant consommé n°4,Sorts complexes → Quatrième composant,Champ optionnel
+Spell.dbc,ReagentID_5,Item.dbc,ID,N-N,Sorts,Composant consommé n°5,Sorts avancés → Cinquième composant,Champ optionnel
+Spell.dbc,ReagentID_6,Item.dbc,ID,N-N,Sorts,Composant consommé n°6,Sorts rares → Sixième composant,Champ optionnel
+Spell.dbc,ReagentID_7,Item.dbc,ID,N-N,Sorts,Composant consommé n°7,Sorts épiques → Septième composant,Champ optionnel
+Spell.dbc,ReagentID_8,Item.dbc,ID,N-N,Sorts,Composant consommé n°8,Sorts légendaires → Huitième composant,Champ optionnel
+Spell.dbc,ReagentCount_1,Item.dbc,Count,N-N,Sorts,Quantité du composant n°1,Portail : Hurlevent → 1 pierre,Valeur numérique
+Spell.dbc,ReagentCount_2,Item.dbc,Count,N-N,Sorts,Quantité du composant n°2,Rituel → 2 bougies,Valeur numérique
+Spell.dbc,ReagentCount_3,Item.dbc,Count,N-N,Sorts,Quantité du composant n°3,Sorts complexes → 3 items,Valeur numérique
+Spell.dbc,ReagentCount_4,Item.dbc,Count,N-N,Sorts,Quantité du composant n°4,Sorts avancés → 4 items,Valeur numérique
+Spell.dbc,ReagentCount_5,Item.dbc,Count,N-N,Sorts,Quantité du composant n°5,Sorts rares → 5 items,Valeur numérique
+Spell.dbc,ReagentCount_6,Item.dbc,Count,N-N,Sorts,Quantité du composant n°6,Sorts épiques → 6 items,Valeur numérique
+Spell.dbc,ReagentCount_7,Item.dbc,Count,N-N,Sorts,Quantité du composant n°7,Sorts légendaires → 7 items,Valeur numérique
+Spell.dbc,ReagentCount_8,Item.dbc,Count,N-N,Sorts,Quantité du composant n°8,Sorts ultimes → 8 items,Valeur numérique
+Spell.dbc,EffectItemID_1,Item.dbc,ID,N-N,Sorts,Item créé par le sort n°1,Invocation : Éclair de mana → Item 17008,Création d'item
+Spell.dbc,EffectItemID_2,Item.dbc,ID,N-N,Sorts,Item créé par le sort n°2,Invocation : Nourriture → Item secondaire,Création d'item
+Spell.dbc,EffectItemID_3,Item.dbc,ID,N-N,Sorts,Item créé par le sort n°3,Invocation : Boisson → Item tertiaire,Création d'item
+Spell.dbc,EffectSpellID_1,Spell.dbc,ID,N-1,Sorts,Sort déclenché n°1,Métamorphose → Aura de métamorphose,Auto-référence
+Spell.dbc,EffectSpellID_2,Spell.dbc,ID,N-1,Sorts,Sort déclenché n°2,Sceau du croisé → Jugement,Sort secondaire
+Spell.dbc,EffectSpellID_3,Spell.dbc,ID,N-1,Sorts,Sort déclenché n°3,Sorts complexes → Troisième sort,Sort tertiaire
+Spell.dbc,EffectTriggerSpellID_1,Spell.dbc,ID,N-1,Sorts,Sort sur déclencheur n°1,Sceau → Jugement du croisé,Sort sur proc
+Spell.dbc,EffectTriggerSpellID_2,Spell.dbc,ID,N-1,Sorts,Sort sur déclencheur n°2,Auras → Effet de proc,Sort sur proc
+Spell.dbc,EffectTriggerSpellID_3,Spell.dbc,ID,N-1,Sorts,Sort sur déclencheur n°3,Effets complexes → Proc tertiaire,Sort sur proc
+Spell.dbc,SpellCooldownGroupID,SpellCooldowns.dbc,ID,N-1,Sorts,Groupe de cooldown partagé,Sorts de métamorphose → Groupe 87,Partage le cooldown
+Spell.dbc,RequiredTotemCategoryID_1,TotemCategory.dbc,ID,N-1,Sorts,Catégorie de totem requise n°1,Totem de soins → Totem d'eau,Nécessite un totem
+Spell.dbc,RequiredTotemCategoryID_2,TotemCategory.dbc,ID,N-1,Sorts,Catégorie de totem requise n°2,Sorts chamaniques → Second totem,Nécessite un totem
+Item.dbc,DisplayInfoID,ItemDisplayInfo.dbc,ID,N-1,Items,Apparence 3D de l'item,Ashbringer (ID 13262) → Modèle unique,Définit l'apparence
+Item.dbc,SpellID_1,Spell.dbc,ID,N-N,Items,Sort conféré n°1,Cœur de Ragnaros → Fureur de Ragnaros,Sort à l'utilisation
+Item.dbc,SpellID_2,Spell.dbc,ID,N-N,Items,Sort conféré n°2,Objets complexes → Second sort,Sort secondaire
+Item.dbc,SpellID_3,Spell.dbc,ID,N-N,Items,Sort conféré n°3,Objets rares → Troisième sort,Sort tertiaire
+Item.dbc,SpellID_4,Spell.dbc,ID,N-N,Items,Sort conféré n°4,Objets épiques → Quatrième sort,Sort quaternaire
+Item.dbc,SpellID_5,Spell.dbc,ID,N-N,Items,Sort conféré n°5,Objets légendaires → Cinquième sort,Sort quinaire
+Item.dbc,SpellTrigger_1,Spell.dbc,Trigger,N-N,Items,Type de déclenchement n°1,Épée runique → Sur coup,0=utilisation 1=équipé 2=proc
+Item.dbc,SpellTrigger_2,Spell.dbc,Trigger,N-N,Items,Type de déclenchement n°2,Armes → Sur coup critique,Type de proc
+Item.dbc,SpellTrigger_3,Spell.dbc,Trigger,N-N,Items,Type de déclenchement n°3,Armures → Sur réception de dégâts,Type de proc
+Item.dbc,SpellTrigger_4,Spell.dbc,Trigger,N-N,Items,Type de déclenchement n°4,Bijoux → Sur soin,Type de proc
+Item.dbc,SpellTrigger_5,Spell.dbc,Trigger,N-N,Items,Type de déclenchement n°5,Objets spéciaux → Proc spécial,Type de proc
+Item.dbc,SpellCharges_1,Spell.dbc,Charges,N-N,Items,Charges du sort n°1,Pierre de soins → 3 charges,Nombre d'utilisations
+Item.dbc,SpellCharges_2,Spell.dbc,Charges,N-N,Items,Charges du sort n°2,Objets à charges → 5 charges,Nombre d'utilisations
+Item.dbc,SpellCharges_3,Spell.dbc,Charges,N-N,Items,Charges du sort n°3,Objets consommables → 10 charges,Nombre d'utilisations
+Item.dbc,SpellCharges_4,Spell.dbc,Charges,N-N,Items,Charges du sort n°4,Objets rares → 15 charges,Nombre d'utilisations
+Item.dbc,SpellCharges_5,Spell.dbc,Charges,N-N,Items,Charges du sort n°5,Objets épiques → 20 charges,Nombre d'utilisations
+Item.dbc,ItemSetID,ItemSet.dbc,ID,N-1,Items,Ensemble d'items,Heaume de Tranche-Mort → Ensemble 817,Appartenance à un set
+Item.dbc,RandomPropertiesID,ItemRandomProperties.dbc,ID,N-1,Items,Propriétés aléatoires,Lame runique → de l'Ours,Suffixe aléatoire
+Item.dbc,RandomSuffixID,ItemRandomSuffix.dbc,ID,N-1,Items,Suffixe aléatoire,Lame runique → de l'Ours (suffixe 164),Nom aléatoire
+Item.dbc,RequiredReputationFaction,Faction.dbc,ID,N-1,Items,Réputation requise,Épée du croisé → Croisade d'argent,Faction spécifique
+Item.dbc,RequiredReputationRank,Faction.dbc,Rank,N-1,Items,Rang de réputation requis,Épée du croisé → Exalté,0=neutre 7=exalté
+Item.dbc,RequiredSkillID,SkillLine.dbc,ID,N-1,Items,Compétence requise,Minerai de thorium → Minage (186),Compétence nécessaire
+Item.dbc,RequiredSkillRank,SkillLine.dbc,Rank,N-1,Items,Niveau de compétence requis,Minerai de thorium → Minage 245,Niveau de compétence
+Item.dbc,RequiredLevel,,Level,N-1,Items,Niveau requis pour utiliser,Ashbringer → Niveau 60,Niveau minimum
+Item.dbc,ContainerSlots,,Slots,N-1,Items,Nombre d'emplacements,Sac de voyageur → 6 emplacements,Pour les conteneurs
+Item.dbc,LockID,Lock.dbc,ID,N-1,Items,Mécanisme de verrouillage,Coffre verrouillé → Lock 48,Définit le crochetage
+Item.dbc,GroupID,ItemGroupSounds.dbc,ID,N-1,Items,Sons de l'item,Épée longue → Son de métal,Type de son
+Item.dbc,MaterialID,Material.dbc,ID,N-1,Items,Matériau de l'item,Épée → Métal (matériau 1),Type de matériau
+Item.dbc,TotemCategoryID,TotemCategory.dbc,ID,N-1,Items,Catégorie de totem,Totem de terre → Catégorie 47,Pour les totems
+Item.dbc,PageTextID,PageTextMaterial.dbc,ID,N-1,Items,Texte de la page,Journal de quête → Texte unique,Contenu textuel
+Item.dbc,FactionID,Faction.dbc,ID,N-1,Items,Faction autorisée,Monture tauren → Tauren uniquement,Restriction de faction
+Item.dbc,BuyPrice,,Price,N-1,Items,Prix d'achat,Petit sac → 4 pièces d'argent,En cuivre
+Item.dbc,ItemLevel,,Level,N-1,Items,Niveau d'objet,Ashbringer → Ilvl 74,Puissance de l'item
+ItemDisplayInfo.dbc,ModelID_1,ModelFileData.dbc,ID,N-1,Items,Modèle 3D principal,Épée → Modèle .m2,Apparence principale
+ItemDisplayInfo.dbc,ModelID_2,ModelFileData.dbc,ID,N-1,Items,Modèle 3D secondaire,Bouclier → Modèle alternatif,Apparence alternative
+ItemDisplayInfo.dbc,TextureID_1,TextureFileData.dbc,ID,N-1,Items,Texture principale,Armure → Texture .blp,Texture principale
+ItemDisplayInfo.dbc,TextureID_2,TextureFileData.dbc,ID,N-1,Items,Texture secondaire,Armure → Texture de détail,Texture secondaire
+ItemDisplayInfo.dbc,TextureID_3,TextureFileData.dbc,ID,N-1,Items,Texture tertiaire,Armure → Texture de finition,Texture tertiaire
+ItemDisplayInfo.dbc,TextureID_4,TextureFileData.dbc,ID,N-1,Items,Texture quaternaire,Armures complexes → Texture supplémentaire,Texture additionnelle
+ItemDisplayInfo.dbc,TextureID_5,TextureFileData.dbc,ID,N-1,Items,Texture quinaire,Armures détaillées → Texture détaillée,Texture additionnelle
+ItemDisplayInfo.dbc,TextureID_6,TextureFileData.dbc,ID,N-1,Items,Texture sixième,Armures élaborées → Texture élaborée,Texture additionnelle
+ItemDisplayInfo.dbc,TextureID_7,TextureFileData.dbc,ID,N-1,Items,Texture septième,Objets complexes → Texture complexe,Texture additionnelle
+ItemDisplayInfo.dbc,TextureID_8,TextureFileData.dbc,ID,N-1,Items,Texture huitième,Objets détaillés → Texture détaillée,Texture additionnelle
+ItemDisplayInfo.dbc,TextureID_9,TextureFileData.dbc,ID,N-1,Items,Texture neuvième,Objets élaborés → Texture élaborée,Texture additionnelle
+ItemDisplayInfo.dbc,TextureID_10,TextureFileData.dbc,ID,N-1,Items,Texture dixième,Objets spéciaux → Texture spéciale,Texture additionnelle
+ItemDisplayInfo.dbc,IconID,ItemDisplayInfo.dbc,ID,N-1,Items,Icône d'inventaire,Potion → Icon 348,Icône affichée
+ItemDisplayInfo.dbc,ParticleColorID,ParticleColor.dbc,ID,N-1,Items,Couleur des particules,Épée enchantée → Lueur rouge,Effet visuel
+ItemDisplayInfo.dbc,SoundID,ItemGroupSounds.dbc,ID,N-1,Items,Sons de l'item,Bâton → Son de bois,Type de son
+ItemSet.dbc,ItemID_1,Item.dbc,ID,1-N,Items,Item de l'ensemble n°1,Tranche-Mort → Heaume,Première pièce
+ItemSet.dbc,ItemID_2,Item.dbc,ID,1-N,Items,Item de l'ensemble n°2,Tranche-Mort → Épaulières,Deuxième pièce
+ItemSet.dbc,ItemID_3,Item.dbc,ID,1-N,Items,Item de l'ensemble n°3,Tranche-Mort → Plastron,Troisième pièce
+ItemSet.dbc,ItemID_4,Item.dbc,ID,1-N,Items,Item de l'ensemble n°4,Tranche-Mort → Gants,Quatrième pièce
+ItemSet.dbc,ItemID_5,Item.dbc,ID,1-N,Items,Item de l'ensemble n°5,Tranche-Mort → Jambières,Cinquième pièce
+ItemSet.dbc,ItemID_6,Item.dbc,ID,1-N,Items,Item de l'ensemble n°6,Tranche-Mort → Bottes,Sixième pièce
+ItemSet.dbc,ItemID_7,Item.dbc,ID,1-N,Items,Item de l'ensemble n°7,Tranche-Mort → Ceinture,Septième pièce
+ItemSet.dbc,ItemID_8,Item.dbc,ID,1-N,Items,Item de l'ensemble n°8,Tranche-Mort → Brassards,Huitième pièce
+ItemSet.dbc,SetSpellID_1,Spell.dbc,ID,N-N,Items,Bonus de set n°1,Tranche-Mort → Bonus 2 pièces,Sort bonus
+ItemSet.dbc,SetSpellID_2,Spell.dbc,ID,N-N,Items,Bonus de set n°2,Tranche-Mort → Bonus 4 pièces,Sort bonus
+ItemSet.dbc,SetSpellID_3,Spell.dbc,ID,N-N,Items,Bonus de set n°3,Tranche-Mort → Bonus 6 pièces,Sort bonus
+ItemSet.dbc,SetSpellID_4,Spell.dbc,ID,N-N,Items,Bonus de set n°4,Tranche-Mort → Bonus 8 pièces,Sort bonus
+ItemSet.dbc,SetSpellID_5,Spell.dbc,ID,N-N,Items,Bonus de set n°5,Ensembles spéciaux → Bonus supplémentaire,Sort bonus
+ItemSet.dbc,SetSpellID_6,Spell.dbc,ID,N-N,Items,Bonus de set n°6,Ensembles rares → Bonus additionnel,Sort bonus
+ItemSet.dbc,SetSpellID_7,Spell.dbc,ID,N-N,Items,Bonus de set n°7,Ensembles épiques → Bonus étendu,Sort bonus
+ItemSet.dbc,SetSpellID_8,Spell.dbc,ID,N-N,Items,Bonus de set n°8,Ensembles légendaires → Bonus ultime,Sort bonus
+ItemSet.dbc,SkillLineID,SkillLine.dbc,ID,N-1,Items,Compétence associée à l'ensemble,Ensemble de forgeron → Forge,Compétence liée
+CreatureDisplayInfo.dbc,ModelID,CreatureModelData.dbc,ID,N-1,Créatures,Modèle 3D de la créature,Ragnaros → Géant de feu,Modèle principal
+CreatureDisplayInfo.dbc,TextureID_1,TextureFileData.dbc,ID,N-1,Créatures,Texture principale,Onyxia → Cuir noir,Texture principale
+CreatureDisplayInfo.dbc,TextureID_2,TextureFileData.dbc,ID,N-1,Créatures,Texture secondaire,Dragon → Écailles,Texture secondaire
+CreatureDisplayInfo.dbc,TextureID_3,TextureFileData.dbc,ID,N-1,Créatures,Texture tertiaire,Créatures complexes → Détails,Texture tertiaire
+CreatureDisplayInfo.dbc,SoundID,CreatureSoundData.dbc,ID,1-1,Créatures,Sons de la créature,Murloc → Cri spécifique,Sons uniques
+CreatureDisplayInfo.dbc,ExtraDisplayInfoID,CreatureDisplayInfoExtra.dbc,ID,N-1,Créatures,Apparence supplémentaire,Dragon → Ailes et cornes,Apparence additionnelle
+CreatureDisplayInfo.dbc,CreatureModelScale,,Scale,N-1,Créatures,Échelle du modèle,Ogre → 1.25x,Taille relative
+CreatureDisplayInfo.dbc,NPCSoundID,NpcSounds.dbc,ID,N-1,Créatures,Sons du PNJ,Vendeur → Sons de vendeur,Sons spécifiques
+CreatureDisplayInfo.dbc,PortraitTextureID,TextureFileData.dbc,ID,N-1,Créatures,Texture de portrait,Roi-liche → Portrait unique,Portrait affiché
+CreatureModelData.dbc,ModelPathID,ModelFileData.dbc,ID,N-1,Créatures,Chemin du modèle .m2,Loup → Models/wolf.m2,Fichier modèle
+CreatureModelData.dbc,SizeClass,,Class,N-1,Créatures,Classe de taille,Ogre → Classe 3 (grand),Catégorie de taille
+CreatureModelData.dbc,CollisionWidth,,Width,N-1,Créatures,Largeur de collision,Dragon → 5 mètres,Zone de collision
+CreatureModelData.dbc,MountHeight,,Height,N-1,Créatures,Hauteur de monture,Cheval → 1.8 mètres,Pour les montures
+CreatureSoundData.dbc,SoundID_1,SoundEntries.dbc,ID,N-N,Créatures,Son d'action n°1,Murloc → Cri,Type de son
+CreatureSoundData.dbc,SoundID_2,SoundEntries.dbc,ID,N-N,Créatures,Son d'action n°2,Murloc → Mort,Type de son
+CreatureSoundData.dbc,SoundID_3,SoundEntries.dbc,ID,N-N,Créatures,Son d'action n°3,Murloc → Attaque,Type de son
+CreatureSoundData.dbc,SoundID_4,SoundEntries.dbc,ID,N-N,Créatures,Son d'action n°4,Murloc → Blessure,Type de son
+CreatureSoundData.dbc,NPCSoundID,NpcSounds.dbc,ID,N-1,Créatures,Sons du PNJ,Garde → Sons de garde,Sons spécifiques
+Map.dbc,AreaTableID,AreaTable.dbc,ID,1-N,Zones,Zones de la carte,Kalimdor (1) → Durotar (14),Zones contenues
+Map.dbc,LoadingScreenID,LoadingScreens.dbc,ID,N-1,Zones,Écran de chargement,Kalimdor → Écran spécifique,Écran affiché
+Map.dbc,MapType,,Type,N-1,Zones,Type de carte,Azeroth → Continent,0=continent 1=instance
+Map.dbc,Directory,,Path,N-1,Zones,Dossier des fichiers,Kalimdor → Kalimdor,Chemin des fichiers
+Map.dbc,MapName,,Name,N-1,Zones,Nom de la carte,1 → Kalimdor,Nom affiché
+Map.dbc,MinimapIconScale,,Scale,N-1,Zones,Échelle de la minimap,Kalimdor → 0.5,Taille de l'icône
+AreaTable.dbc,ZoneMusicID,ZoneMusic.dbc,ID,N-1,Zones,Musique de la zone,Durotar → Musique unique,Musique d'ambiance
+AreaTable.dbc,LoadingScreenID,LoadingScreens.dbc,ID,N-1,Zones,Écran de chargement,Mulgore → Écran unique,Écran affiché
+AreaTable.dbc,ParentAreaID,AreaTable.dbc,ID,N-1,Zones,Zone parente,Durotar → Kalimdor,Hiérarchie
+AreaTable.dbc,MapID,Map.dbc,ID,N-1,Zones,Carte parente,Durotar → Kalimdor (1),Appartenance
+AreaTable.dbc,FactionGroupID,FactionGroup.dbc,ID,N-1,Zones,Groupe de faction,Durotar → Horde,Contrôle de zone
+AreaTable.dbc,ZoneIntroMusicID,ZoneMusic.dbc,ID,N-1,Zones,Musique d'intro,Mulgore → Musique d'entrée,Musique spéciale
+AreaTable.dbc,AreaType,,Type,N-1,Zones,Type de zone,Durotar → Zone extérieure,Type de zone
+ZoneMusic.dbc,SoundID_1,SoundEntries.dbc,ID,N-1,Zones,Fichier audio principal,Durotar → Musique d'ambiance,Musique principale
+ZoneMusic.dbc,SoundID_2,SoundEntries.dbc,ID,N-1,Zones,Fichier audio secondaire,Durotar → Musique alternative,Musique alternative
+ZoneMusic.dbc,Volume,,Volume,N-1,Zones,Volume de la musique,Durotar → 0.8,Niveau sonore
+ZoneMusic.dbc,MinDelay,,Delay,N-1,Zones,Délai minimum,Durotar → 10 secondes,Délai de lecture
+ZoneMusic.dbc,MaxDelay,,Delay,N-1,Zones,Délai maximum,Durotar → 30 secondes,Délai de lecture
+ModelFileData.dbc,FileDataID,,FileID,N-1,Modèles,ID du fichier modèle,Wolf.m2 → FileID 12345,Identifiant unique
+ModelFileData.dbc,Flags,,Flags,N-1,Modèles,Drapeaux du modèle,Animated → Bit 3,Propriétés du modèle
+TextureFileData.dbc,FileDataID,,FileID,N-1,Textures,ID du fichier texture,Wolf.blp → FileID 67890,Identifiant unique
+TextureFileData.dbc,TexturePath,,Path,N-1,Textures,Chemin de la texture,Creature/Wolf/Wolf.blp,Chemin du fichier
+TextureFileData.dbc,Flags,,Flags,N-1,Textures,Drapeaux de texture,Mipmap → Bit 0,Propriétés de texture
+SpellVisualKit.dbc,FileDataID,TextureFileData.dbc,ID,N-1,Effets,Texture des particules,Nova de givre → Texture de glace,Texture d'effet
+SpellVisualKit.dbc,ModelID_1,ModelFileData.dbc,ID,N-1,Effets,Modèle d'effet n°1,Boule de feu → Modèle de feu,Modèle principal
+SpellVisualKit.dbc,ModelID_2,ModelFileData.dbc,ID,N-1,Effets,Modèle d'effet n°2,Nova de givre → Modèle de glace,Modèle secondaire
+SpellVisualKit.dbc,ModelID_3,ModelFileData.dbc,ID,N-1,Effets,Modèle d'effet n°3,Éclair → Modèle de foudre,Modèle tertiaire
+SpellVisualKit.dbc,SoundID,SoundEntries.dbc,ID,N-1,Effets,Son de l'effet,Éclair → Son de foudre,Son d'effet
+SpellVisual.dbc,SpellVisualKitID,SpellVisualKit.dbc,ID,N-1,Effets,Kit visuel principal,Boule de feu → Kit de projectile,Kit principal
+SpellVisual.dbc,SpellVisualKitID_2,SpellVisualKit.dbc,ID,N-1,Effets,Kit visuel d'impact,Boule de feu → Kit d'explosion,Kit secondaire
+SoundEntries.dbc,FileDataID_1,SoundFiles.dbc,ID,1-N,Sons,Fichier audio n°1,Cri de murloc → Variation 1,Fichier principal
+SoundEntries.dbc,FileDataID_2,SoundFiles.dbc,ID,1-N,Sons,Fichier audio n°2,Cri de murloc → Variation 2,Fichier alternatif
+SoundEntries.dbc,FileDataID_3,SoundFiles.dbc,ID,1-N,Sons,Fichier audio n°3,Cri de murloc → Variation 3,Fichier alternatif
+SoundEntries.dbc,FileDataID_4,SoundFiles.dbc,ID,1-N,Sons,Fichier audio n°4,Sons complexes → Variation 4,Fichier alternatif
+SoundEntries.dbc,FileDataID_5,SoundFiles.dbc,ID,1-N,Sons,Fichier audio n°5,Sons détaillés → Variation 5,Fichier alternatif
+SoundEntries.dbc,FileDataID_6,SoundFiles.dbc,ID,1-N,Sons,Fichier audio n°6,Sons élaborés → Variation 6,Fichier alternatif
+SoundEntries.dbc,FileDataID_7,SoundFiles.dbc,ID,1-N,Sons,Fichier audio n°7,Sons complexes → Variation 7,Fichier alternatif
+SoundEntries.dbc,FileDataID_8,SoundFiles.dbc,ID,1-N,Sons,Fichier audio n°8,Sons détaillés → Variation 8,Fichier alternatif
+SoundEntries.dbc,FileDataID_9,SoundFiles.dbc,ID,1-N,Sons,Fichier audio n°9,Sons élaborés → Variation 9,Fichier alternatif
+SoundEntries.dbc,FileDataID_10,SoundFiles.dbc,ID,1-N,Sons,Fichier audio n°10,Sons spéciaux → Variation 10,Fichier alternatif
+SoundEntries.dbc,SoundType,,Type,N-1,Sons,Type de son,Ambiance → Type 2,Type de son
+SoundFiles.dbc,FileDataID,,FileID,N-1,Sons,ID du fichier audio,Murloc_cry.ogg → FileID,Identifiant unique
+SoundFiles.dbc,Path,,Path,N-1,Sons,Chemin du fichier,Sound/Creature/Murloc/Cry.ogg,Chemin du fichier
+SkillLine.dbc,CategoryID,SkillLineCategory.dbc,ID,N-1,Compétences,Catégorie de compétence,Cuisine → Métiers secondaires,Catégorie
+SkillLine.dbc,IconID,SpellIcon.dbc,ID,N-1,Compétences,Icône de la compétence,Alchimie → Icon 346,Icône affichée
+SkillLine.dbc,SkillLineID,SkillLineAbility.dbc,ID,1-N,Compétences,Capacités de la compétence,Cuisine (185) → 200+ recettes,Liste des capacités
+SkillLineAbility.dbc,SpellID,Spell.dbc,ID,N-1,Compétences,Capacité apprise,Ambidextrie (205) → Sort 674,Sort lié
+SkillLineAbility.dbc,SkillLineID,SkillLine.dbc,ID,N-1,Compétences,Compétence parente,Recette de cuisine → Cuisine,Compétence liée
+SkillLineAbility.dbc,RaceMask,ChrRaces.dbc,Mask,N-N,Compétences,Races pouvant apprendre,Ingénierie gnome → Gnome uniquement,Restriction de race
+SkillLineAbility.dbc,ClassMask,ChrClasses.dbc,Mask,N-N,Compétences,Classes pouvant apprendre,Crochetage → Voleur uniquement,Restriction de classe
+Talent.dbc,SpellID,Spell.dbc,ID,N-1,Talents,Sort conféré par le talent,Peau de givre → Sort amélioré,Sort lié
+Talent.dbc,TalentTabID,TalentTab.dbc,ID,N-1,Talents,Arbre de talents,Élémentaire → Arbre du chaman,Arbre lié
+Talent.dbc,RequiredSpellID,Spell.dbc,ID,N-1,Talents,Sort prérequis,Amélioration → Sort de base,Prérequis
+Talent.dbc,Rank_1,Spell.dbc,ID,1-N,Talents,Rang n°1 du talent,Bouclier divin → Rang 1,Premier rang
+Talent.dbc,Rank_2,Spell.dbc,ID,1-N,Talents,Rang n°2 du talent,Bouclier divin → Rang 2,Deuxième rang
+Talent.dbc,Rank_3,Spell.dbc,ID,1-N,Talents,Rang n°3 du talent,Bouclier divin → Rang 3,Troisième rang
+Talent.dbc,Rank_4,Spell.dbc,ID,1-N,Talents,Rang n°4 du talent,Talents avancés → Rang 4,Quatrième rang
+Talent.dbc,Rank_5,Spell.dbc,ID,1-N,Talents,Rang n°5 du talent,Talents ultimes → Rang 5,Cinquième rang
+TalentTab.dbc,SpellIconID,SpellIcon.dbc,ID,N-1,Talents,Icône de l'arbre,Arbre Sacré → Icon 235,Icône affichée
+LoadingScreens.dbc,TextureFileDataID,TextureFileData.dbc,ID,N-1,Zones,Texture de l'écran,Kalimdor → Image de chargement,Image affichée
+ScreenEffect.dbc,TextureFileDataID,TextureFileData.dbc,ID,N-1,Effets,Texture de l'effet,Flash → Texture blanche,Effet visuel
+FootprintTextures.dbc,TextureFileDataID,TextureFileData.dbc,ID,N-1,Créatures,Texture d'empreinte,Empreinte de loup → Texture,Empreinte au sol
+CameraShakes.dbc,SoundID,SoundEntries.dbc,ID,N-1,Effets,Son du tremblement,Tremblement de terre → Son,Effet sonore
+WorldMapOverlay.dbc,TextureFileDataID,TextureFileData.dbc,ID,N-1,Zones,Texture de superposition,Carte du monde → Texture,Carte affichée
+DungeonMap.dbc,TextureFileDataID,TextureFileData.dbc,ID,N-1,Zones,Texture de la carte,Donjon → Carte,Plan du donjon
+DungeonMapChunk.dbc,TextureFileDataID,TextureFileData.dbc,ID,N-1,Zones,Texture du morceau,Donjon → Morceau de carte,Partie de la carte
+ItemVisuals.dbc,TextureFileDataID,TextureFileData.dbc,ID,N-1,Items,Texture du visuel,Item → Visuel,Apparence visuelle
+ItemVisualEffects.dbc,TextureFileDataID,TextureFileData.dbc,ID,N-1,Items,Texture de l'effet,Item enchanté → Effet,Effet visuel
