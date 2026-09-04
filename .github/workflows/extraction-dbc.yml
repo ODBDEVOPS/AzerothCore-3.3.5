@@ -1,0 +1,119 @@
+name: 🎮 Extraction DBC AzerothCore
+
+# Déclencheurs
+on:
+  # Manuellement
+  workflow_dispatch:
+    inputs:
+      nettoyer:
+        description: 'Nettoyer les anciens résultats ?'
+        type: boolean
+        default: true
+  
+  # Automatiquement quand des MPQ sont ajoutés
+  push:
+    paths:
+      - 'mpq/**'
+      - '!mpq/README.md'
+
+jobs:
+  extraction:
+    runs-on: ubuntu-latest
+    
+    steps:
+      # 1. Récupérer le code
+      - name: 📥 Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+      
+      # 2. Installer Python
+      - name: 🐍 Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      
+      # 3. Installer 7zip
+      - name: 📦 Installer 7zip
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y p7zip-full
+          echo "✅ 7zip installé"
+      
+      # 4. Afficher la structure
+      - name: 🔍 Vérifier la structure
+        run: |
+          echo "📁 Structure du repository :"
+          ls -la
+          echo ""
+          echo "📁 Contenu du dossier mpq :"
+          ls -la mpq/ 2>/dev/null || echo "❌ Dossier mpq introuvable"
+      
+      # 5. Vérifier les MPQ
+      - name: ✅ Vérifier les MPQ
+        run: |
+          MPQ_COUNT=$(find mpq/ -name "*.MPQ" -o -name "*.mpq" 2>/dev/null | wc -l)
+          echo "📦 $MPQ_COUNT fichiers MPQ trouvés"
+          
+          if [ $MPQ_COUNT -eq 0 ]; then
+            echo "❌ Aucun MPQ trouvé !"
+            echo "👉 Uploadez vos MPQ dans le dossier mpq/"
+            exit 1
+          fi
+      
+      # 6. Lancer l'extraction
+      - name: 🚀 Lancer l'extraction
+        run: |
+          python tools/dbc-extraction/extract_dbc.py
+      
+      # 7. Afficher les résultats
+      - name: 📊 Afficher le rapport
+        run: |
+          if [ -f "resultats_dbc/rapport_extraction.txt" ]; then
+            echo "📄 Rapport d'extraction :"
+            cat resultats_dbc/rapport_extraction.txt
+          fi
+      
+      # 8. Uploader les DBC uniques
+      - name: 📤 Uploader les DBC uniques
+        uses: actions/upload-artifact@v3
+        with:
+          name: dbc-uniques
+          path: resultats_dbc/uniques/
+          retention-days: 30
+      
+      # 9. Uploader les doublons
+      - name: 📤 Uploader les doublons
+        uses: actions/upload-artifact@v3
+        with:
+          name: dbc-doublons
+          path: resultats_dbc/doublons/
+          retention-days: 30
+      
+      # 10. Uploader le rapport
+      - name: 📤 Uploader le rapport
+        uses: actions/upload-artifact@v3
+        with:
+          name: rapport-extraction
+          path: |
+            resultats_dbc/rapport_extraction.json
+            resultats_dbc/rapport_extraction.txt
+          retention-days: 30
+      
+      # 11. Commiter les résultats
+      - name: 💾 Sauvegarder les résultats
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          
+          # Ajouter les rapports
+          git add resultats_dbc/rapport_extraction.json
+          git add resultats_dbc/rapport_extraction.txt
+          
+          # Vérifier s'il y a des changements
+          if git diff --cached --quiet; then
+            echo "Pas de changements à commiter"
+          else
+            git commit -m "📊 Auto: Mise à jour des résultats DBC [skip ci]"
+            git push
+          fi
