@@ -1,6 +1,6 @@
 // ===================================================================
-        // 1. DONNÉES ORGANISÉES PAR TABLE DB
-        // ===================================================================
+// 1. DONNÉES ORGANISÉES PAR TABLE DB
+// ===================================================================
 export const libraryByTable = {
             item_template: [
                 { id: 49623, name: "Shadowmourne", sub: "Arme 2H — Hache", quality: "Legendary", dbField: "entry" },
