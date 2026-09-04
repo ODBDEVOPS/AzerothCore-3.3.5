@@ -9,7 +9,7 @@ Voici une liste exhaustive et structurée des DBC (Database Client) pour World o
 ### **1. DBC PRINCIPAUX (CORE)**
 
 #### **Achievement.dbc**
-```
+
 ├── Achievement_Category.dbc
 ├── Achievement_Criteria.dbc
 ├── Spell.dbc
@@ -21,7 +21,7 @@ Voici une liste exhaustive et structurée des DBC (Database Client) pour World o
 └── Icon (via Achievement_Criteria)
 
 #### **Spell.dbc (234 champs - Le plus important)**
-```
+
 ├── SpellIcon.dbc
 ├── SpellVisual.dbc
 ├── SpellVisualKit.dbc
