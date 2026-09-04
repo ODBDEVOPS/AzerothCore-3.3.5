@@ -1,6 +1,3 @@
-Voici un README.md complet et professionnel pour un repository GitHub nommé "DBFilesClient" qui regroupe les fichiers DBC de World of Warcraft 3.3.5a :
-
-```markdown
 # DBFilesClient - World of Warcraft 3.3.5a Database Files
 
 <div align="center">
