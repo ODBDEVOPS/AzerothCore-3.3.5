@@ -1,0 +1,198 @@
+%% ============================================
+%% Schéma des Dépendances DBC - World of Warcraft
+%% Version : 1.0
+%% Date : 2026-09-04
+%% Compatible : Retail 11.0.2 | Classic 1.15.4 | WotLK 3.4.3
+%% ============================================
+
+graph TD
+    %% ==================== DOMAINE SORTS ====================
+    subgraph SORTS["🔮 Domaine Sorts"]
+        S["Spell.dbc<br/>Hub Principal<br/>50+ liaisons"]
+        SV["SpellVisual.dbc<br/>Apparence visuelle"]
+        SVK["SpellVisualKit.dbc<br/>Kit visuel"]
+        SI["SpellIcon.dbc<br/>Icônes"]
+        SCT["SpellCastTimes.dbc<br/>Temps d'incantation"]
+        SD["SpellDuration.dbc<br/>Durée des effets"]
+        SR["SpellRange.dbc<br/>Portée"]
+        SC["SpellCooldowns.dbc<br/>Recharge"]
+        SCA["SpellCategory.dbc<br/>Catégories"]
+        SAO["SpellAuraOptions.dbc<br/>Options d'aura"]
+        SAR["SpellAuraRestrictions.dbc<br/>Restrictions d'aura"]
+        SCR["SpellCastingRequirements.dbc<br/>Conditions"]
+        SL["SpellLevels.dbc<br/>Niveaux"]
+        SM["SpellMissile.dbc<br/>Projectiles"]
+        SP["SpellPower.dbc<br/>Puissance"]
+        SRa["SpellRadius.dbc<br/>Rayon d'effet"]
+        SSc["SpellScaling.dbc<br/>Échelle"]
+        SSh["SpellShapeshift.dbc<br/>Formes"]
+        SDV["SpellDescriptionVariables.dbc<br/>Variables"]
+        SEI["SpellEquippedItems.dbc<br/>Items équipés"]
+        SInt["SpellInterrupts.dbc<br/>Interruptions"]
+        SRC["SpellRuneCost.dbc<br/>Coût en runes"]
+
+        S -->|"SpellVisualID"| SV
+        S -->|"SpellIconID"| SI
+        S -->|"SpellCastTimeID"| SCT
+        S -->|"SpellDurationID"| SD
+        S -->|"SpellRangeID"| SR
+        S -->|"SpellCooldownsID"| SC
+        S -->|"SpellCategoryID"| SCA
+        S -->|"SpellAuraOptionsID"| SAO
+        S -->|"SpellAuraRestrictionsID"| SAR
+        S -->|"SpellCastingRequirementsID"| SCR
+        S -->|"SpellLevelsID"| SL
+        S -->|"SpellMissileID"| SM
+        S -->|"SpellPowerID"| SP
+        S -->|"SpellRadiusID"| SRa
+        S -->|"SpellScalingID"| SSc
+        S -->|"SpellShapeshiftID"| SSh
+        S -->|"SpellDescriptionVariablesID"| SDV
+        S -->|"SpellEquippedItemsID"| SEI
+        S -->|"SpellInterruptsID"| SInt
+        S -->|"SpellRuneCostID"| SRC
+        SV -->|"SpellVisualKitID"| SVK
+    end
+
+    %% ==================== DOMAINE ITEMS ====================
+    subgraph ITEMS["🎒 Domaine Items"]
+        I["Item.dbc<br/>Hub Secondaire<br/>30+ liaisons"]
+        IDI["ItemDisplayInfo.dbc<br/>Apparence"]
+        IS["ItemSet.dbc<br/>Ensembles"]
+        IRP["ItemRandomProperties.dbc<br/>Propriétés aléatoires"]
+        IRS["ItemRandomSuffix.dbc<br/>Suffixes aléatoires"]
+        IEC["ItemExtendedCost.dbc<br/>Coûts étendus"]
+        IGS["ItemGroupSounds.dbc<br/>Sons des items"]
+        L["Lock.dbc<br/>Verrouillage"]
+        PTM["PageTextMaterial.dbc<br/>Textes"]
+
+        I -->|"DisplayInfoID"| IDI
+        I -->|"ItemSetID"| IS
+        I -->|"RandomPropertiesID"| IRP
+        I -->|"RandomSuffixID"| IRS
+        I -->|"ExtendedCostID"| IEC
+        I -->|"GroupID"| IGS
+        I -->|"LockID"| L
+        I -->|"PageTextID"| PTM
+    end
+
+    %% ==================== DOMAINE CRÉATURES ====================
+    subgraph CREATURES["🐉 Domaine Créatures"]
+        CID["CreatureDisplayInfo.dbc<br/>Apparence"]
+        CMD["CreatureModelData.dbc<br/>Modèles"]
+        CSD["CreatureSoundData.dbc<br/>Sons"]
+        CDE["CreatureDisplayInfoExtra.dbc<br/>Apparences extra"]
+        NS["NpcSounds.dbc<br/>Sons PNJ"]
+
+        CID -->|"ModelID"| CMD
+        CID -->|"SoundID"| CSD
+        CID -->|"ExtraDisplayInfoID"| CDE
+        CID -->|"NPCSoundID"| NS
+    end
+
+    %% ==================== DOMAINE ZONES ====================
+    subgraph ZONES["🗺️ Domaine Zones"]
+        M["Map.dbc<br/>Continents"]
+        AT["AreaTable.dbc<br/>Zones"]
+        ZM["ZoneMusic.dbc<br/>Musiques"]
+        LS["LoadingScreens.dbc<br/>Écrans de chargement"]
+        FG["FactionGroup.dbc<br/>Groupes de factions"]
+
+        M -->|"AreaTableID"| AT
+        M -->|"LoadingScreenID"| LS
+        AT -->|"ZoneMusicID"| ZM
+        AT -->|"LoadingScreenID"| LS
+        AT -->|"FactionGroupID"| FG
+        AT -->|"ParentAreaID"| AT
+    end
+
+    %% ==================== DOMAINE COMPÉTENCES ====================
+    subgraph SKILLS["📚 Domaine Compétences"]
+        SK["SkillLine.dbc<br/>Compétences"]
+        SKA["SkillLineAbility.dbc<br/>Capacités"]
+        SKC["SkillLineCategory.dbc<br/>Catégories"]
+
+        SK -->|"CategoryID"| SKC
+        SK -->|"SkillLineID"| SKA
+        SKA -->|"SpellID"| S
+    end
+
+    %% ==================== DOMAINE TALENTS ====================
+    subgraph TALENTS["⭐ Domaine Talents"]
+        T["Talent.dbc<br/>Talents"]
+        TT["TalentTab.dbc<br/>Arbres de talents"]
+
+        T -->|"TalentTabID"| TT
+        T -->|"SpellID"| S
+        T -->|"RequiredSpellID"| S
+    end
+
+    %% ==================== LIAISONS CROISÉES ====================
+    S -->|"ReagentID_1..8<br/>Consomme"| I
+    S -->|"EffectItemID_1..3<br/>Crée"| I
+    I -->|"SpellID_1..5<br/>Confère"| S
+    IS -->|"ItemID_1..8"| I
+    IS -->|"SetSpellID_1..8"| S
+    SK -->|"IconID"| SI
+
+    %% ==================== DOMAINE MODÈLES ET TEXTURES ====================
+    subgraph MODELES["🖼️ Modèles et Textures"]
+        TXT["TextureFileData.dbc<br/>Textures<br/>Feuille Terminale"]
+        MFD["ModelFileData.dbc<br/>Modèles 3D<br/>Feuille Terminale"]
+    end
+
+    %% ==================== DOMAINE SONS ====================
+    subgraph SONS["🎵 Domaine Sons"]
+        SE["SoundEntries.dbc<br/>Entrées sonores"]
+        SF["SoundFiles.dbc<br/>Fichiers audio<br/>Feuille Terminale"]
+    end
+
+    %% Liaisons vers les modèles et textures
+    SVK -->|"FileDataID"| TXT
+    SVK -->|"ModelID_1..3"| MFD
+    CMD -->|"TextureID"| TXT
+    CMD -->|"ModelPathID"| MFD
+    IDI -->|"TextureID_1..10"| TXT
+    IDI -->|"ModelID_1..2"| MFD
+    CDE -->|"TextureID"| TXT
+
+    %% Liaisons vers les sons
+    SVK -->|"SoundID"| SE
+    IGS -->|"SoundID"| SE
+    CSD -->|"SoundID_1..4"| SE
+    NS -->|"SoundID"| SE
+    ZM -->|"SoundID_1..2"| SE
+    SE -->|"FileDataID_1..10"| SF
+
+    %% ==================== STYLES ====================
+    classDef hub fill:#ff6b6b,stroke:#333,stroke-width:4px,color:#fff,font-weight:bold
+    classDef secondary fill:#ffa502,stroke:#333,stroke-width:3px,color:#fff,font-weight:bold
+    classDef normal fill:#4ecdc4,stroke:#333,stroke-width:2px,color:#333
+    classDef terminal fill:#95e1d3,stroke:#333,stroke-width:2px,color:#333
+    classDef leaf fill:#f38181,stroke:#333,stroke-width:2px,color:#fff
+    classDef sound fill:#fdcb6e,stroke:#333,stroke-width:2px,color:#333
+
+    class S hub
+    class I secondary
+    class TXT,MFD,SF leaf
+    class SE sound
+    class SV,SVK,SI,SCT,SD,SR,SC,SCA,SAO,SAR,SCR,SL,SM,SP,SRa,SSc,SSh,SDV,SEI,SInt,SRC normal
+    class IDI,IS,IRP,IRS,IEC,IGS,L,PTM normal
+    class CID,CMD,CSD,CDE,NS normal
+    class M,AT,ZM,LS,FG normal
+    class SK,SKA,SKC,T,TT normal
+
+    %% ==================== LÉGENDE ====================
+    subgraph LEGENDE["📖 Légende"]
+        L1["🔴 Hub Principal<br/>Spell.dbc"]
+        L2["🟠 Hub Secondaire<br/>Item.dbc"]
+        L3["🔵 DBC Normal<br/>Configuration"]
+        L4["🟢 Feuille Terminale<br/>Fichiers"]
+        L5["🟡 Sons et Audio<br/>SoundEntries"]
+    end
+
+    class L1 hub
+    class L2 secondary
+    class L3 normal
+    class L4 leaf
+    class L5 sound
