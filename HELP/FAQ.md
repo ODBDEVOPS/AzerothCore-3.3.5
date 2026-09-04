@@ -276,9 +276,232 @@ for record in loader.obtenir_donnees_finales():
 
 1. **Un DBC** = Un tableau avec des lignes et des colonnes
 2. **Un MPQ** = Une boîte qui contient des DBC
-3. **Plusieurs MPQ** = Plusieurs versions du même DBC
-4. **Le problème** = Quand on lit tout, on trouve des lignes dupliquées ou modifiées
-5. **La solution simple** = Garder la dernière version de chaque ligne (par ID)
-6. **La solution avancée** = En plus, suivre ce qui a changé
+
+Je vais vous expliquer la différence entre les tables `skillline` et `skillline_dbc` dans AzerothCore, et comment gérer leurs données.
+
+## La différence entre les deux tables
+
+Dans AzerothCore, il y a souvent **deux versions de la même donnée** :
+
+### 1. `skillline_dbc` - Les données originales du jeu
+```sql
+-- Cette table contient les données EXACTES des fichiers DBC
+-- C'est une copie directe de SkillLine.dbc
+SELECT * FROM skillline_dbc LIMIT 5;
+```
+- **Source** : Extraite directement des fichiers DBC du client WoW
+- **Contenu** : Données brutes, non modifiées
+- **Usage** : Référence, ne doit PAS être modifiée
+- **Colonnes** : Souvent avec des noms techniques (ID, CategoryID, SkillCostsID, etc.)
+
+### 2. `skillline` - Les données modifiées par le serveur
+```sql
+-- Cette table est utilisée par le serveur, peut être modifiée
+SELECT * FROM skillline LIMIT 5;
+```
+- **Source** : Basée sur les DBC mais peut être modifiée
+- **Contenu** : Données potentiellement modifiées pour le serveur
+- **Usage** : Utilisée activement par le serveur
+- **Colonnes** : Peut avoir des noms plus lisibles ou des colonnes supplémentaires
+
+## Comment voir les différences
+
+### Comparer les deux tables
+```sql
+-- Vérifier si les tables sont identiques
+SELECT 
+    (SELECT COUNT(*) FROM skillline) as count_skillline,
+    (SELECT COUNT(*) FROM skillline_dbc) as count_skillline_dbc;
+
+-- Trouver les différences
+SELECT 'Dans skillline mais pas dans skillline_dbc' as type, ID, DisplayName
+FROM skillline
+WHERE ID NOT IN (SELECT ID FROM skillline_dbc)
+
+UNION ALL
+
+SELECT 'Dans skillline_dbc mais pas dans skillline' as type, ID, DisplayName
+FROM skillline_dbc
+WHERE ID NOT IN (SELECT ID FROM skillline);
+```
+
+### Structure typique des tables
+
+```sql
+-- Structure de skillline_dbc (données DBC brutes)
+DESCRIBE skillline_dbc;
+-- ID, CategoryID, SkillCostsID, DisplayName, Description, 
+-- SpellIconID, AlternateVerb, CanLink
+
+-- Structure de skillline (données serveur)
+DESCRIBE skillline;
+-- ID, CategoryID, SkillCostID, DisplayName, Description, 
+-- SpellIconID, AlternateVerb, CanLink
+-- (peut avoir des colonnes supplémentaires ou noms différents)
+```
+
+## Solution pour fusionner/dédoublonner
+
+### 1. Créer une vue unifiée
+```sql
+-- Créer une vue qui combine les deux tables
+CREATE OR REPLACE VIEW skillline_unified AS
+SELECT 
+    ID,
+    CategoryID,
+    SkillCostID,
+    DisplayName,
+    Description,
+    SpellIconID,
+    AlternateVerb,
+    CanLink,
+    'dbc' as source
+FROM skillline_dbc
+UNION
+SELECT 
+    ID,
+    CategoryID,
+    SkillCostID,
+    DisplayName,
+    Description,
+    SpellIconID,
+    AlternateVerb,
+    CanLink,
+    'server' as source
+FROM skillline
+WHERE ID NOT IN (SELECT ID FROM skillline_dbc);
+```
+
+### 2. Trouver les doublons et différences
+```sql
+-- Trouver les IDs présents dans les deux tables avec des valeurs différentes
+SELECT 
+    s.ID,
+    s.DisplayName as server_name,
+    d.DisplayName as dbc_name,
+    CASE 
+        WHEN s.DisplayName != d.DisplayName THEN 'NOM DIFFERENT'
+        ELSE 'IDENTIQUE'
+    END as statut
+FROM skillline s
+INNER JOIN skillline_dbc d ON s.ID = d.ID
+WHERE s.DisplayName != d.DisplayName
+   OR s.CategoryID != d.CategoryID
+   OR s.SkillCostID != d.SkillCostID;
+```
+
+### 3. Synchroniser les tables (si nécessaire)
+```sql
+-- Mettre à jour skillline avec les données de skillline_dbc
+UPDATE skillline s
+INNER JOIN skillline_dbc d ON s.ID = d.ID
+SET 
+    s.CategoryID = d.CategoryID,
+    s.SkillCostID = d.SkillCostID,
+    s.DisplayName = d.DisplayName,
+    s.Description = d.Description,
+    s.SpellIconID = d.SpellIconID,
+    s.AlternateVerb = d.AlternateVerb,
+    s.CanLink = d.CanLink;
+```
+
+### 4. Créer une table de référence unique
+```sql
+-- Créer une table propre qui contient les données finales
+CREATE TABLE IF NOT EXISTS skillline_final AS
+SELECT 
+    COALESCE(s.ID, d.ID) as ID,
+    -- Priorité aux données serveur si elles existent
+    COALESCE(s.CategoryID, d.CategoryID) as CategoryID,
+    COALESCE(s.SkillCostID, d.SkillCostID) as SkillCostID,
+    COALESCE(s.DisplayName, d.DisplayName) as DisplayName,
+    COALESCE(s.Description, d.Description) as Description,
+    COALESCE(s.SpellIconID, d.SpellIconID) as SpellIconID,
+    COALESCE(s.AlternateVerb, d.AlternateVerb) as AlternateVerb,
+    COALESCE(s.CanLink, d.CanLink) as CanLink
+FROM skillline s
+LEFT JOIN skillline_dbc d ON s.ID = d.ID;
+```
+
+## Script Python pour analyser les deux tables
+
+```python
+import mysql.connector
+
+def comparer_skillline():
+    """Compare les tables skillline et skillline_dbc"""
+    
+    # Connexion à la base
+    conn = mysql.connector.connect(
+        host="localhost",
+        user="votre_user",
+        password="votre_password",
+        database="acore_world"
+    )
+    cursor = conn.cursor(dictionary=True)
+    
+    # Lire les deux tables
+    cursor.execute("SELECT * FROM skillline")
+    skillline = {row['ID']: row for row in cursor.fetchall()}
+    
+    cursor.execute("SELECT * FROM skillline_dbc")
+    skillline_dbc = {row['ID']: row for row in cursor.fetchall()}
+    
+    print(f"skillline: {len(skillline)} enregistrements")
+    print(f"skillline_dbc: {len(skillline_dbc)} enregistrements")
+    
+    # Analyser les différences
+    tous_ids = set(skillline.keys()) | set(skillline_dbc.keys())
+    
+    identiques = 0
+    differents = 0
+    seulement_skillline = []
+    seulement_dbc = []
+    
+    for id in tous_ids:
+        if id in skillline and id in skillline_dbc:
+            # Comparer les enregistrements
+            if skillline[id] == skillline_dbc[id]:
+                identiques += 1
+            else:
+                differents += 1
+                print(f"\nDifférence pour ID {id}:")
+                for champ in skillline[id]:
+                    if skillline[id][champ] != skillline_dbc[id].get(champ):
+                        print(f"  {champ}: {skillline[id][champ]} vs {skillline_dbc[id].get(champ)}")
+        elif id in skillline:
+            seulement_skillline.append(id)
+        else:
+            seulement_dbc.append(id)
+    
+    print(f"\nRésumé:")
+    print(f"  Identiques: {identiques}")
+    print(f"  Différents: {differents}")
+    print(f"  Seulement dans skillline: {len(seulement_skillline)}")
+    print(f"  Seulement dans skillline_dbc: {len(seulement_dbc)}")
+    
+    cursor.close()
+    conn.close()
+
+# Exécuter
+comparer_skillline()
+```
+
+## En résumé simple :
+
+1. **`skillline_dbc`** = Copie exacte des données du client WoW (fichiers DBC)
+2. **`skillline`** = Version utilisée par le serveur, peut être modifiée
+3. **Le doublon est normal** : c'est le design d'AzerothCore
+4. **Ne supprimez pas** ces tables sans comprendre leur usage
+5. **Pour vos besoins** : utilisez `skillline` si vous voulez modifier, `skillline_dbc` comme référence
+
+Quelle table devez-vous utiliser pour votre projet ? Ça dépend de ce que vous voulez faire :
+- **Lecture seule** : utilisez `skillline_dbc` (données originales)
+- **Modification** : utilisez `skillline` (données du serveur)
+- **Comparaison** : utilisez les deux pour voir ce qui a été changé
+4. **Plusieurs MPQ** = Plusieurs versions du même DBC
+5. **Le problème** = Quand on lit tout, on trouve des lignes dupliquées ou modifiées
+6. **La solution simple** = Garder la dernière version de chaque ligne (par ID)
+7. **La solution avancée** = En plus, suivre ce qui a changé
 
 La clé est l'**ID** : chaque ligne a un numéro unique. Si vous trouvez deux lignes avec le même ID, c'est la même donnée dans deux versions différentes. Il faut décider laquelle garder (généralement la dernière).
