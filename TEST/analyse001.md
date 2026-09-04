@@ -4,12 +4,10 @@ Voici une liste exhaustive et structurée des DBC (Database Client) pour World o
 
 ## **LISTE EXHAUSTIVE DES DBC WOW 3.3.5a**
 
----
-
 ### **1. DBC PRINCIPAUX (CORE)**
 
 #### **Achievement.dbc**
-
+```
 ├── Achievement_Category.dbc
 ├── Achievement_Criteria.dbc
 ├── Spell.dbc
@@ -19,9 +17,9 @@ Voici une liste exhaustive et structurée des DBC (Database Client) pour World o
 ├── GameObject.dbc (référence via GameObjectEntry)
 ├── Faction.dbc
 └── Icon (via Achievement_Criteria)
-
+```
 #### **Spell.dbc (234 champs - Le plus important)**
-
+```
 ├── SpellIcon.dbc
 ├── SpellVisual.dbc
 ├── SpellVisualKit.dbc
@@ -57,8 +55,6 @@ Voici une liste exhaustive et structurée des DBC (Database Client) pour World o
 └── AreaTable.dbc (pour SpellTargetRestrictions)
 ```
 
----
-
 ### **2. DBC DES COMPÉTENCES ET MÉTIERS**
 
 ```
@@ -80,8 +76,6 @@ SkillLine.dbc
 └── SkillLineAbilitySortedSpell.dbc
     └── Spell.dbc
 ```
-
----
 
 ### **3. DBC DES ITEMS ET ÉQUIPEMENT**
 
@@ -126,8 +120,6 @@ ItemDisplayInfo.dbc
 └── SoundEntries.dbc (sons d'équipement)
 ```
 
----
-
 ### **4. DBC DES CRÉATURES ET PNJ**
 
 ```
@@ -160,9 +152,6 @@ CreatureDisplayInfoExtra.dbc
 ├── TextureFileData.dbc
 └── ItemDisplayInfo.dbc (équipement)
 ```
-
----
-
 ### **5. DBC DES ZONES ET CARTES**
 
 ```
@@ -198,8 +187,6 @@ MapDifficulty.dbc
 └── LoadingScreens.dbc (écran de chargement)
 ```
 
----
-
 ### **6. DBC DES QUÊTES**
 
 ```
@@ -219,8 +206,6 @@ QuestSort.dbc
 QuestXP.dbc
 └── Aucune dépendance (table de valeurs)
 ```
-
----
 
 ### **7. DBC DES GRAPHIQUES ET EFFETS**
 
@@ -275,8 +260,6 @@ GroundEffectTexture.dbc
 └── TextureFileData.dbc
 ```
 
----
-
 ### **8. DBC DES INTERFACES**
 
 ```
@@ -306,8 +289,6 @@ CharacterHairGeosets.dbc
 ├── ChrRaces.dbc
 └── TextureFileData.dbc
 ```
-
----
 
 ### **9. DBC DE COMBAT ET STATISTIQUES**
 
@@ -349,8 +330,6 @@ Cfg_Categories.dbc
 ├── Cfg_Configs.dbc
 └── Localization (via locale)
 ```
-
----
 
 ### **10. DBC DES CLASSES ET RACES**
 
@@ -397,8 +376,6 @@ CharStartOutfit.dbc
 └── Spell.dbc (SpellID1-10)
 ```
 
----
-
 ### **11. DBC DES FACTIONS ET RÉPUTATIONS**
 
 ```
@@ -417,8 +394,6 @@ FactionTemplate.dbc
 ├── Faction.dbc (FactionID1-4)
 └── FactionTemplate.dbc (référence croisée)
 ```
-
----
 
 ### **12. DBC DES DONJONS ET RAIDS**
 
@@ -445,8 +420,6 @@ LFGDungeons.dbc
 LFGDungeonGroup.dbc
 └── LFGDungeons.dbc
 ```
-
----
 
 ### **13. DBC DES SORTS ET AURAS SPÉCIFIQUES**
 
@@ -520,8 +493,6 @@ SpellTotems.dbc
 └── Item.dbc (TotemID1-2)
 ```
 
----
-
 ### **14. DBC DES CINÉMATIQUES ET EFFETS SPÉCIAUX**
 
 ```
@@ -543,8 +514,6 @@ MovieVariation.dbc
 ├── Movie.dbc
 └── MovieFileData.dbc
 ```
-
----
 
 ### **15. DBC DES ENVIRONNEMENTS ET EFFETS MÉTÉO**
 
@@ -570,9 +539,6 @@ ZoneLightPoint.dbc
 ├── ZoneLight.dbc
 └── Map.dbc
 ```
-
----
-
 ### **16. DBC DES ÉVÉNEMENTS ET CALENDRIER**
 
 ```
@@ -606,8 +572,6 @@ WorldStateZoneSounds.dbc
 └── SoundEntries.dbc
 ```
 
----
-
 ### **17. DBC DES MÉTIERS ET PROFESSIONS**
 
 ```
@@ -627,7 +591,6 @@ ItemEnchantment.dbc (alias de SpellItemEnchantment)
 └── Même structure que SpellItemEnchantment
 ```
 
----
 
 ### **18. DBC DES TRANSPORTS ET VÉHICULES**
 
@@ -650,8 +613,6 @@ VehicleSeat.dbc
 └── Item.dbc (ItemID)
 ```
 
----
-
 ### **19. DBC DES RÉSEAUX ET BATTLE.NET**
 
 ```
@@ -670,7 +631,6 @@ WardenChecks.dbc (sécurité, non documenté publiquement)
 └── Aucune dépendance
 ```
 
----
 
 ### **20. DBC DE LOCALISATION ET LANGAGE**
 
@@ -689,7 +649,6 @@ Locales (fichiers de localisation)
 └── Tous les DBC avec des champs texte
 ```
 
----
 
 ### **21. DBC DIVERS ET UTILITAIRES**
 
@@ -800,8 +759,6 @@ WorldStateUI.dbc
 ├── AreaTable.dbc
 └── SoundEntries.dbc
 ```
-
----
 
 ### **RÉSUMÉ STATISTIQUE**
 
